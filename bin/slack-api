@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+
+echo
+
+usage() {
+    cat <<EOF
+Usage: $0 command
+
+commands:
+  channels                                             To get all the channels
+  messages                                             To get all the messages in a channel
+  replies                                              To get all the replies of a messages in a channel
+EOF
+  exit 1
+}
+
+CMD=${1:-}
+shift || true
+case ${CMD} in
+  channels) node --experimental-modules "$(dirname "$BASH_SOURCE")/../lib/index.js" channels ;;
+  messages) node --experimental-modules "$(dirname "$BASH_SOURCE")/../lib/index.js" messages ;;
+  replies) node --experimental-modules "$(dirname "$BASH_SOURCE")/../lib/index.js" replies ;;
+  *) usage ;;
+esac
+
+
